@@ -1,0 +1,5 @@
+name: Lux Portraits
+markdown: kramdown
+baseurl: luxportraits.com
+exclude: ['README.md']
+permalink: pretty

@@ -1,0 +1,160 @@
+.frame {
+  animation: fadein;
+  animation-duration: 1.2s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: rgb(20,20,20);
+  opacity: 0.95;
+  cursor: pointer;
+  display: block;
+}
+.loader {
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  cursor: url('http://res.cloudinary.com/mwong9968/image/upload/c_scale,w_48/v1508027926/right-arrow_p5j753.png') 20 20, pointer;
+}
+.frame {
+  position: fixed;
+  top: 0px;
+  height: calc(100% - 5em);
+  z-index: 999;
+  background-color: white;
+  padding: 40px 40px 0px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: 10px;
+}
+.object {
+  position: relative;
+  float: left;
+  display: block;
+}
+
+.object::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 1e3px;
+  height: 1e3px;
+  content: '';
+  background: #efefef;
+}
+.image {
+
+  height: calc(100vh - 140px);
+}
+.frozen {
+  -webkit-filter: blur(8px);
+  -moz-filter: blur(8px);
+  -o-filter: blur(8px);
+  -ms-filter: blur(8px);
+  filter: blur(8px);
+  transform: scale(1.06);
+  animation: .2s ease-in 1.2s 1 forwards fade;
+  height: calc(100vh - 140px);
+  left: 0px;
+  position: absolute;
+
+}
+@keyframes fade {
+    0% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+figcaption {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 20px;
+  font-style: italic;
+}
+.close {
+  top: 3px;
+  right: 10px;
+  -webkit-appearance: none;
+  border: none;
+  position: absolute;
+  color: #000;
+  padding: 0px;
+  font-size: 17px;
+  opacity: 0.2;
+  background-color: transparent;
+  font-family: "Helvetica Neue"
+}
+
+.close:hover {
+  opacity: .5;
+  cursor: pointer;
+}
+
+figure {
+  margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .object {
+    height: calc(100vh - 240px)
+  }
+  .frozen {
+    height: calc(100vh - 240px)
+  }
+  .frame {
+    height: calc(100% - 160px);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .object {
+    height: calc(100vh - 290px)
+  }
+  .frozen {
+    height: calc(100vh - 290px)
+  }
+  .frame {
+    height: calc(100% - 200px);
+  }
+}
+
+@media screen and (max-width: 465px) {
+  .frame {
+    height: auto;
+    margin: 0px;
+    padding: 10px 10px 20px;
+  }
+  figure {
+    padding: 0 10px;
+  }
+  .object{
+    height: auto;
+    width: 100%;
+    width: calc(100vw - 20px);
+  }
+  .frozen {
+    height: auto;
+    width: 100%;
+    width: calc(100vw - 20px);
+  }
+}

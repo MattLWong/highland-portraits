@@ -1,0 +1,44 @@
+---
+layout: page
+---
+
+{{ content }}
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.slider-front').bxSlider({
+      slideWidth: 300,
+      minSlides: 2,
+      maxSlides: 3,
+      slideMargin: 1,
+      moveSlides: 1,
+      // auto: true,
+      // autoHover: true,
+      speed: 300
+    });
+
+    var width = $(window).width();
+    if (width < 866 && width > 668) {
+      $('.slide').addClass('doublePicture');
+    }
+    if (width < 669) {
+      $('.slide').addClass('singlePicture');
+    }
+
+    $( window ).resize(function() {
+      var width = $(window).width();
+      if (width < 866 && width > 669) {
+        $('.slide').removeClass('singlePicture');
+        $('.slide').addClass('doublePicture');
+      } else if (width < 669) {
+        $('.slide').removeClass('doublePicture');
+        $('.slide').addClass('singlePicture');
+      }
+      else {
+        $('.slide').removeClass('doublePicture');
+        $('.slide').removeClass('singlePicture');
+      }
+    })
+  })
+</script>

@@ -1,0 +1,87 @@
+.gallery {
+  margin: 15px 16px 0px;
+}
+.gallery a {
+  cursor: pointer;
+}
+.square {
+  float: left;
+  background-color: red;
+  width: 220px;
+  height: 220px;
+}
+
+.thumbnail {
+  margin: 0 12px 12px 0;
+  height: 208px;
+  width: 208px;
+  background-color: beige;
+}
+
+@media screen and (min-width: 669px) {
+  .gallery a:nth-of-type(4n) .square .thumbnail {
+    background-color: blue;
+    margin-right: 0px;
+  }
+
+  .gallery a:nth-of-type(4n) .square {
+    width: 208px;
+  }
+}
+
+
+
+
+.gallery::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+@media screen and (max-width: 914px) {
+
+  .gallery {
+    margin: 15px 21px 0px;
+  }
+  .square {
+    --widthA: calc(100vw - 94px);
+    --widthB: calc(var(--widthA) / 4);
+    width: calc(var(--widthB) + 12px);
+    height: calc(var(--widthB) + 12px);
+  }
+  .thumbnail {
+    --widthA: calc(100vw - 94px);
+    --widthB: calc(var(--widthA) / 4);
+    width: var(--widthB);
+    height: var(--widthB);
+  }
+
+  .gallery a:nth-of-type(4n) .square {
+    --widthA: calc(100vw - 94px);
+    --widthB: calc(var(--widthA) / 4);
+    width: calc(var(--widthB));
+  }
+}
+
+@media screen and (max-width: 668px) {
+  .gallery a:nth-of-type(2n) .square .thumbnail {
+    background-color: blue;
+    margin-right: 0px;
+  }
+  .square {
+    --widthA: calc(100vw - 75px);
+    --widthB: calc(var(--widthA) / 2);
+    width: calc(var(--widthB) + 12px);
+    height: calc(var(--widthB) + 12px);
+  }
+  .thumbnail {
+    --widthA: calc(100vw - 75px);
+    width: calc(var(--widthA) / 2);
+    height: calc(var(--widthA) / 2);
+  }
+  .gallery a:nth-of-type(2n) .square {
+    --widthA: calc(100vw - 75px);
+    --widthB: calc(var(--widthA) / 2);
+    width: var(--widthB);
+  }
+}
