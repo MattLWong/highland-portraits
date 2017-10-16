@@ -1,7 +1,14 @@
 import React from 'react';
 
 class Modal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { imageStatus: {display: 'none'} }
+  }
 
+  handleImageLoaded() {
+    this.setState({imageStatus: {display: 'block'}})
+  }
   render() {
     return(
       <div className="modal">
@@ -10,9 +17,14 @@ class Modal extends React.Component {
         </div>
         <div className="frame">
           <figure>
-            <div className="loader">
+            <div className="loader"
+              style={this.state.imageStatus}>
               <img className='image object' src={this.props.imageUrl} alt="portrait"/>
-              <img className='frozen' src={this.props.frozenUrl} alt=""/>
+              <img
+                className='frozen'
+                src={this.props.frozenUrl}
+                alt=""
+                onLoad={this.handleImageLoaded.bind(this)}/>
               <div className="left"
                 onClick={() => this.props.toggleModal('before', this.props.idx)}>
 
@@ -31,6 +43,13 @@ class Modal extends React.Component {
 }
 
 class Square extends React.Component {
+  constructor(props) {
+    this.state = {style: {display: 'none'}}
+  }
+  handleImageLoaded() {
+    console.log("div has loaded");
+    debugger;
+  }
   render() {
     const style = {
       background: `url(${this.props.squareUrl})`,
@@ -40,7 +59,8 @@ class Square extends React.Component {
       <a onClick={() => this.props.enlarge(this.props.idx)}>
         <div className='square'>
           <div className='thumbnail'
-            style={style}>
+            style={style}
+            onLoad={this.handleImageLoaded.bind(this)}>
           </div>
         </div>
       </a>
