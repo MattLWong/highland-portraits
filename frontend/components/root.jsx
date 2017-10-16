@@ -44,11 +44,11 @@ class Modal extends React.Component {
 
 class Square extends React.Component {
   constructor(props) {
+    super(props);
     this.state = {style: {display: 'none'}}
   }
   handleImageLoaded() {
-    console.log("div has loaded");
-    debugger;
+    this.setState({style: {display: 'block'}})
   }
   render() {
     const style = {
@@ -59,8 +59,10 @@ class Square extends React.Component {
       <a onClick={() => this.props.enlarge(this.props.idx)}>
         <div className='square'>
           <div className='thumbnail'
-            style={style}
-            onLoad={this.handleImageLoaded.bind(this)}>
+            style={this.state.style}>
+            <img className='square-img'
+              src={this.props.squareUrl}
+              onLoad={this.handleImageLoaded.bind(this)}></img>
           </div>
         </div>
       </a>

@@ -18,6 +18,10 @@
   animation-duration: 4s;
 }
 
+.square-img {
+  height: 100%;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;

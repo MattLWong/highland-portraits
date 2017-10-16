@@ -10844,10 +10844,253 @@ module.exports = isTextInputElement;
 
 /***/ }),
 /* 86 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: 'this' is not allowed before super()\n\n\u001b[0m \u001b[90m 45 | \u001b[39m\u001b[36mclass\u001b[39m \u001b[33mSquare\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mReact\u001b[39m\u001b[33m.\u001b[39m\u001b[33mComponent\u001b[39m {\n \u001b[90m 46 | \u001b[39m  constructor(props) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 47 | \u001b[39m    \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate \u001b[33m=\u001b[39m {style\u001b[33m:\u001b[39m {display\u001b[33m:\u001b[39m \u001b[32m'none'\u001b[39m}}\n \u001b[90m    | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 48 | \u001b[39m  }\n \u001b[90m 49 | \u001b[39m  handleImageLoaded() {\n \u001b[90m 50 | \u001b[39m    console\u001b[33m.\u001b[39mlog(\u001b[32m\"div has loaded\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(51);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Modal = function (_React$Component) {
+  _inherits(Modal, _React$Component);
+
+  function Modal(props) {
+    _classCallCheck(this, Modal);
+
+    var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+
+    _this.state = { imageStatus: { display: 'none' } };
+    return _this;
+  }
+
+  _createClass(Modal, [{
+    key: 'handleImageLoaded',
+    value: function handleImageLoaded() {
+      this.setState({ imageStatus: { display: 'block' } });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'modal' },
+        _react2.default.createElement('div', { className: 'overlay',
+          onClick: function onClick() {
+            return _this2.props.toggleModal('off');
+          } }),
+        _react2.default.createElement(
+          'div',
+          { className: 'frame' },
+          _react2.default.createElement(
+            'figure',
+            null,
+            _react2.default.createElement(
+              'div',
+              { className: 'loader',
+                style: this.state.imageStatus },
+              _react2.default.createElement('img', { className: 'image object', src: this.props.imageUrl, alt: 'portrait' }),
+              _react2.default.createElement('img', {
+                className: 'frozen',
+                src: this.props.frozenUrl,
+                alt: '',
+                onLoad: this.handleImageLoaded.bind(this) }),
+              _react2.default.createElement('div', { className: 'left',
+                onClick: function onClick() {
+                  return _this2.props.toggleModal('before', _this2.props.idx);
+                } }),
+              _react2.default.createElement('div', { className: 'right',
+                onClick: function onClick() {
+                  return _this2.props.toggleModal('next', _this2.props.idx);
+                } })
+            ),
+            _react2.default.createElement(
+              'figcaption',
+              null,
+              this.props.caption
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Modal;
+}(_react2.default.Component);
+
+var Square = function (_React$Component2) {
+  _inherits(Square, _React$Component2);
+
+  function Square(props) {
+    _classCallCheck(this, Square);
+
+    var _this3 = _possibleConstructorReturn(this, (Square.__proto__ || Object.getPrototypeOf(Square)).call(this, props));
+
+    _this3.state = { style: { display: 'none' } };
+    return _this3;
+  }
+
+  _createClass(Square, [{
+    key: 'handleImageLoaded',
+    value: function handleImageLoaded() {
+      this.setState({ style: { display: 'block' } });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
+
+      var style = {
+        background: 'url(' + this.props.squareUrl + ')',
+        backgroundSize: 'cover'
+      };
+      return _react2.default.createElement(
+        'a',
+        { onClick: function onClick() {
+            return _this4.props.enlarge(_this4.props.idx);
+          } },
+        _react2.default.createElement(
+          'div',
+          { className: 'square' },
+          _react2.default.createElement(
+            'div',
+            { className: 'thumbnail',
+              style: this.state.style },
+            _react2.default.createElement('img', { className: 'square-img',
+              src: this.props.squareUrl,
+              onLoad: this.handleImageLoaded.bind(this) })
+          )
+        )
+      );
+    }
+  }]);
+
+  return Square;
+}(_react2.default.Component);
+
+var Gallery = function (_React$Component3) {
+  _inherits(Gallery, _React$Component3);
+
+  function Gallery(props) {
+    _classCallCheck(this, Gallery);
+
+    var _this5 = _possibleConstructorReturn(this, (Gallery.__proto__ || Object.getPrototypeOf(Gallery)).call(this, props));
+
+    _this5.state = {
+      modalVisible: false,
+      idx: "",
+      imageUrl: "",
+      frozenUrl: "",
+      caption: ""
+    };
+    _this5.toggleModal = _this5.toggleModal.bind(_this5);
+    _this5.enlarge = _this5.enlarge.bind(_this5);
+
+    _this5.squareUrls = ["http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-1.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-2.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-3.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-4.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-5.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-6.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-7.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-8.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-9.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-10.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-11.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-12.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-13.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-14.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-15.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-16.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-17.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-18.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-19.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-20.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-21.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-22.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-23.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-24.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-25.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-26.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-27.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-28.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-29.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-30.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-31.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-32.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-33.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-34.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-35.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508114783/highland-square-400/s-36.jpg"];
+
+    _this5.imageUrls = ["http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/1.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/2.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/3.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/4.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/5.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/6.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/7.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/8.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/9.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/10.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/11.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/12.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/13.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/14.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/15.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/16.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/17.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/18.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/19.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/20.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/21.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/22.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/23.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/24.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/25.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/26.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/27.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/28.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/29.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/30.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/31.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/32.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/33.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/34.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/35.jpg", "http://res.cloudinary.com/mwong9968/image/upload/v1508115243/highland-45/36.jpg"];
+
+    _this5.frozenUrls = ["/img/gallery/frozen/1.jpg", "/img/gallery/frozen/2.jpg", "/img/gallery/frozen/3.jpg", "/img/gallery/frozen/4.jpg", "/img/gallery/frozen/5.jpg", "/img/gallery/frozen/6.jpg", "/img/gallery/frozen/7.jpg", "/img/gallery/frozen/8.jpg", "/img/gallery/frozen/9.jpg", "/img/gallery/frozen/10.jpg", "/img/gallery/frozen/11.jpg", "/img/gallery/frozen/12.jpg", "/img/gallery/frozen/13.jpg", "/img/gallery/frozen/14.jpg", "/img/gallery/frozen/15.jpg", "/img/gallery/frozen/16.jpg", "/img/gallery/frozen/17.jpg", "/img/gallery/frozen/18.jpg", "/img/gallery/frozen/19.jpg", "/img/gallery/frozen/20.jpg", "/img/gallery/frozen/21.jpg", "/img/gallery/frozen/22.jpg", "/img/gallery/frozen/23.jpg", "/img/gallery/frozen/24.jpg", "/img/gallery/frozen/25.jpg", "/img/gallery/frozen/26.jpg", "/img/gallery/frozen/27.jpg", "/img/gallery/frozen/28.jpg", "/img/gallery/frozen/29.jpg", "/img/gallery/frozen/30.jpg", "/img/gallery/frozen/31.jpg", "/img/gallery/frozen/32.jpg", "/img/gallery/frozen/33.jpg", "/img/gallery/frozen/34.jpg", "/img/gallery/frozen/35.jpg", "/img/gallery/frozen/36.jpg"];
+
+    _this5.captions = ["Letha, March 2017", 'Claret, March 2017', 'Darshan, Red Victorian SF, May 2016', 'Baraa, April 2017', "Catherine, August 2015", "Monika, April 2017", "Chinwendu, April 2017", "Ram, January 2016", "Alex, July 2017", "Wayne, February 2016", "Alec, August 2017", "Lushen, November 2015", "Rowena, April 2015", "Ricardo, December 2015", "Liz, January 2016", "Su, March 2015", "Tiffany, August 2016", "Aymeric, March 2016", "Enkhee, April 2016", "Alok, July 2016", "Wendy, May 2017", "Phil, March 2015", "Elsa, Red Victorian SF, May 2016", "Natalie, August 2016", "Tanay, March 2017", "Lara, March 2015", "Keaton, December 2016", "Susan, April 2017", "Sandra, August 2016", "Pavel, April 2017", "Aaron, May 2017", "Alejandro, April 2017", "Arun, May 2017", "John, May 2017", "Richard, April 2017", "Fabrice, April 2017"];
+    return _this5;
+  }
+
+  _createClass(Gallery, [{
+    key: 'toggleModal',
+    value: function toggleModal(string, i) {
+      var _this6 = this;
+
+      if (string == "off") {
+        this.setState({ modalVisible: false });
+      } else if (string == 'next') {
+        if (i == this.squareUrls.length - 1) {
+          this.setState({ modalVisible: false }, function () {
+            return _this6.enlarge(0);
+          });
+        } else {
+          this.setState({ modalVisible: false }, function () {
+            return _this6.enlarge(i + 1);
+          });
+        }
+      } else if (string == 'before') {
+        if (i == 0) {
+          this.setState({ modalVisible: false }, function () {
+            return _this6.enlarge(_this6.squareUrls.length - 1);
+          });
+        } else {
+          this.setState({ modalVisible: false }, function () {
+            return _this6.enlarge(i - 1);
+          });
+        }
+      }
+    }
+  }, {
+    key: 'renderSquares',
+    value: function renderSquares() {
+      var _this7 = this;
+
+      return this.squareUrls.map(function (url, idx) {
+        return _react2.default.createElement(Square, {
+          key: idx,
+          idx: idx,
+          squareUrl: _this7.squareUrls[idx],
+          enlarge: _this7.enlarge,
+          toggleModal: _this7.toggleModal,
+          alt: _this7.captions[idx]
+        });
+      });
+    }
+  }, {
+    key: 'enlarge',
+    value: function enlarge(id) {
+      this.setState({
+        idx: id,
+        imageUrl: this.imageUrls[id],
+        frozenUrl: this.frozenUrls[id],
+        caption: this.captions[id],
+        modalVisible: true
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var err = 1;
+      return _react2.default.createElement(
+        'div',
+        { className: 'gallery' },
+        this.state.modalVisible ? _react2.default.createElement(Modal, {
+          idx: this.state.idx,
+          imageUrl: this.state.imageUrl,
+          frozenUrl: this.state.frozenUrl,
+          caption: this.state.caption,
+          toggleModal: this.toggleModal }) : null,
+        this.renderSquares()
+      );
+    }
+  }]);
+
+  return Gallery;
+}(_react2.default.Component);
+
+exports.default = Gallery;
 
 /***/ }),
 /* 87 */
