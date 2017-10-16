@@ -23,13 +23,7 @@
   cursor: pointer;
   display: block;
 }
-.loader {
-  position: relative;
-  overflow: hidden;
-  width: auto;
-  margin: 0;
-  padding: 0;
-}
+
 .frame {
   position: fixed;
   top: 0px;
@@ -42,6 +36,14 @@
   left: 50%;
   transform: translate(-50%, 0);
   margin-top: 10px;
+}
+.loader {
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  height: calc(100vh - 140px);
 }
 .object {
   position: relative;
@@ -60,7 +62,6 @@
   background: #efefef;
 }
 .image {
-
   height: calc(100vh - 140px);
 }
 .frozen {
@@ -70,10 +71,22 @@
   -ms-filter: blur(8px);
   filter: blur(8px);
   transform: scale(1.06);
-  animation: .2s ease-in 1.2s 1 forwards fade;
+  transition: opacity 0.4s;
+  transition-delay: 0.6;
+  /*animation: .2s ease-in 1.2s 1 forwards fade;*/
   height: calc(100vh - 140px);
   left: 0px;
   position: absolute;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
 }
 
 .width {
@@ -99,15 +112,6 @@
   cursor: url('http://res.cloudinary.com/mwong9968/image/upload/v1508050992/right-arrow_s0may7.png') 20 12, pointer;
 }
 
-@keyframes fade {
-    0% {
-        opacity: 1
-    }
-
-    100% {
-        opacity: 0
-    }
-}
 figcaption {
   text-align: center;
   font-family: "Lato";
@@ -133,6 +137,9 @@ figure {
     --height: calc(100vh - 240px);
     width: calc(var(--height) * 0.8);
   }
+  .loader {
+    height: calc(100vh - 240px);
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -146,6 +153,9 @@ figure {
     height: calc(100% - 200px);
     --height: calc(100vh - 290px);
     width: calc(var(--height) * 0.8);
+  }
+  .loader {
+    height: calc(100vh - 290px);
   }
 }
 

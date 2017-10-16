@@ -10875,14 +10875,22 @@ var Modal = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
 
-    _this.state = { imageStatus: { display: 'none' } };
+    _this.state = {
+      imageStatus: { display: 'none' },
+      frozenStyle: { opacity: '1' }
+    };
     return _this;
   }
 
   _createClass(Modal, [{
-    key: 'handleImageLoaded',
-    value: function handleImageLoaded() {
+    key: 'handleFrozenImageLoaded',
+    value: function handleFrozenImageLoaded() {
       this.setState({ imageStatus: { display: 'block' } });
+    }
+  }, {
+    key: 'reduceOpacity',
+    value: function reduceOpacity() {
+      this.setState({ frozenStyle: { opacity: '0' } });
     }
   }, {
     key: 'render',
@@ -10898,20 +10906,24 @@ var Modal = function (_React$Component) {
           } }),
         _react2.default.createElement(
           'div',
-          { className: 'frame' },
+          { className: 'frame',
+            style: this.state.imageStatus },
           _react2.default.createElement(
             'figure',
             null,
             _react2.default.createElement(
               'div',
-              { className: 'loader',
-                style: this.state.imageStatus },
-              _react2.default.createElement('img', { className: 'image object', src: this.props.imageUrl, alt: 'portrait' }),
+              { className: 'loader' },
+              _react2.default.createElement('img', { className: 'image object',
+                src: this.props.imageUrl,
+                alt: 'portrait',
+                onLoad: this.reduceOpacity.bind(this) }),
               _react2.default.createElement('img', {
                 className: 'frozen',
                 src: this.props.frozenUrl,
                 alt: '',
-                onLoad: this.handleImageLoaded.bind(this) }),
+                style: this.state.frozenStyle,
+                onLoad: this.handleFrozenImageLoaded.bind(this) }),
               _react2.default.createElement('div', { className: 'left',
                 onClick: function onClick() {
                   return _this2.props.toggleModal('before', _this2.props.idx);

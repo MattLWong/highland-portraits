@@ -3,31 +3,42 @@ import React from 'react';
 class Modal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { imageStatus: {display: 'none'} }
+    this.state = {
+      imageStatus: {display: 'none'},
+      frozenStyle: {opacity: '1'}
+    }
   }
 
-  handleImageLoaded() {
+  handleFrozenImageLoaded() {
     this.setState({imageStatus: {display: 'block'}})
   }
+
+  reduceOpacity() {
+    this.setState({frozenStyle: {opacity: '0'}})
+  }
+
   render() {
     return(
       <div className="modal">
         <div className="overlay"
           onClick={() => this.props.toggleModal('off') }>
         </div>
-        <div className="frame">
+        <div className="frame"
+          style={this.state.imageStatus}>
           <figure>
-            <div className="loader"
-              style={this.state.imageStatus}>
-              <img className='image object' src={this.props.imageUrl} alt="portrait"/>
+            <div className="loader">
+              <img className='image object'
+                src={this.props.imageUrl}
+                alt="portrait"
+                onLoad={this.reduceOpacity.bind(this)}/>
               <img
                 className='frozen'
                 src={this.props.frozenUrl}
                 alt=""
-                onLoad={this.handleImageLoaded.bind(this)}/>
+                style={this.state.frozenStyle}
+                onLoad={this.handleFrozenImageLoaded.bind(this)}/>
               <div className="left"
                 onClick={() => this.props.toggleModal('before', this.props.idx)}>
-
               </div>
               <div className='right'
                 onClick={() => this.props.toggleModal('next', this.props.idx)}>
