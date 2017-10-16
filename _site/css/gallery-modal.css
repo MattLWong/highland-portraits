@@ -29,12 +29,13 @@
   width: auto;
   margin: 0;
   padding: 0;
-  cursor: url('http://res.cloudinary.com/mwong9968/image/upload/c_scale,w_48/v1508027926/right-arrow_p5j753.png') 20 20, pointer;
 }
 .frame {
   position: fixed;
   top: 0px;
   height: calc(100% - 5em);
+  --height: calc(100vh - 140px);
+  width: calc(var(--height) * 0.8);
   z-index: 999;
   background-color: white;
   padding: 40px 40px 0px;
@@ -73,8 +74,31 @@
   height: calc(100vh - 140px);
   left: 0px;
   position: absolute;
-
 }
+
+.width {
+  height: 0px;
+}
+
+.left {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100px;
+  cursor: url('http://res.cloudinary.com/mwong9968/image/upload/v1508050988/left-arrow_oenk4c.png') 20 12, pointer;
+}
+
+
+.right {
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  width: calc(100% - 100px);
+  height: 100%;
+  cursor: url('http://res.cloudinary.com/mwong9968/image/upload/v1508050992/right-arrow_s0may7.png') 20 12, pointer;
+}
+
 @keyframes fade {
     0% {
         opacity: 1
@@ -86,28 +110,11 @@
 }
 figcaption {
   text-align: center;
-  font-size: 12px;
+  font-family: "Lato";
+  letter-spacing: 0.15px;
+  font-size: 16px;
   font-weight: 500;
-  margin-top: 20px;
-  font-style: italic;
-}
-.close {
-  top: 3px;
-  right: 10px;
-  -webkit-appearance: none;
-  border: none;
-  position: absolute;
-  color: #000;
-  padding: 0px;
-  font-size: 17px;
-  opacity: 0.2;
-  background-color: transparent;
-  font-family: "Helvetica Neue"
-}
-
-.close:hover {
-  opacity: .5;
-  cursor: pointer;
+  margin-top: 15px;
 }
 
 figure {
@@ -123,6 +130,8 @@ figure {
   }
   .frame {
     height: calc(100% - 160px);
+    --height: calc(100vh - 240px);
+    width: calc(var(--height) * 0.8);
   }
 }
 
@@ -135,6 +144,8 @@ figure {
   }
   .frame {
     height: calc(100% - 200px);
+    --height: calc(100vh - 290px);
+    width: calc(var(--height) * 0.8);
   }
 }
 
@@ -156,5 +167,8 @@ figure {
     height: auto;
     width: 100%;
     width: calc(100vw - 20px);
+  }
+  .frame {
+    width: auto;
   }
 }

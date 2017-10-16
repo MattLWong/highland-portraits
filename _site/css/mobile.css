@@ -14,6 +14,8 @@
   .testimonials li {
     width: 100%;
     min-height: 0;
+    padding-left: 1%;
+    padding-right: 1%;
   }
   .footer {
     padding-left:20px;padding-right:20px;
@@ -109,6 +111,10 @@
     float: left;
     padding-top: 4px;
   }
+}
+
+@media screen and (max-width: 487px) {
+
 }
 
 @media screen and (max-width:400px) {
