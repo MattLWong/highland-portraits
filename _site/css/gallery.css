@@ -20,6 +20,12 @@
 
 .square-img {
   height: 100%;
+  filter: grayscale(100%);
+  transition: 0.1s filter linear;
+}
+
+.square-img:hover {
+  filter: none;
 }
 
 @keyframes fadein {
